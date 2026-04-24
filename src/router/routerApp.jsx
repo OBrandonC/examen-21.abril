@@ -1,24 +1,23 @@
-import Inicio from "../pages/Inicio";
-import Filosofia from "../pages/Filosofia";
-import Galeria from "../pages/Galeria";
-import Reservas from "../pages/Reservas";   
+import HomePage from "../pages/HomePage";
+import FilosofiaPage from "../pages/FilosofiaPage";
+import GaleriaPage from "../pages/GaleriaPage";
+import ReservasPage from "../pages/ReservasPage";
 
 export let routerApp = [
     {
-        path:"/",
-        element: <Inicio />
+        path: "/",
+        element: <HomePage />
     },
     {
-        path:"/filosofia",
-        element: <Filosofia />
+        path: "/filosofia",
+        element: <FilosofiaPage />
     },
     {
-        path:"/galeria",
-        element: <Galeria />
+        path: "/galeria",
+        element: <GaleriaPage />
     },
     {
-        path:"/reservas",
-        element: <Reservas />
+        path: "/reservas",
+        element: <ReservasPage />
     }
-
 ]
