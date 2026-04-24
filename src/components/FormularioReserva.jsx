@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { alertExito, alertError } from '../helpers/alerts';
+import { guardarReserva } from '../helpers/localStorage';
 
 export default function FormularioReserva() {
   const [formData, setFormData] = useState({
@@ -19,21 +21,19 @@ export default function FormularioReserva() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validar campos no vacíos
+    
     if (!formData.nombre || !formData.email || !formData.experiencia) {
-      alert('Por favor, completa todos los campos obligatorios.');
+      alertError();
       return;
     }
 
-    // Guardar en localStorage
-    const reservas = JSON.parse(localStorage.getItem('reservasBonsai')) || [];
-    reservas.push(formData);
-    localStorage.setItem('reservasBonsai', JSON.stringify(reservas));
+   
+    guardarReserva(formData);
 
-    // Log en consola
+    
     console.log('Reserva guardada:', formData);
 
-    // Limpiar formulario
+  
     setFormData({
       nombre: '',
       email: '',
@@ -41,7 +41,7 @@ export default function FormularioReserva() {
       mensaje: '',
     });
 
-    alert('¡Solicitud enviada exitosamente!');
+    alertExito();
   };
 
   return (
@@ -58,7 +58,6 @@ export default function FormularioReserva() {
             placeholder="Ej. Ana Silva"
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="email">Correo electrónico</label>
           <input
@@ -70,7 +69,6 @@ export default function FormularioReserva() {
             placeholder="tu@email.com"
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="experiencia">Nivel de experiencia</label>
           <select
@@ -79,13 +77,11 @@ export default function FormularioReserva() {
             value={formData.experiencia}
             onChange={handleChange}
           >
-            
             <option value="principiante">Principiante (Nunca he tenido un Bonsái)</option>
             <option value="intermedio">Intermedio (Tengo algunos árboles)</option>
             <option value="avanzado">Avanzado (Busco perfeccionar técnicas)</option>
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="mensaje">Mensaje (Opcional)</label>
           <textarea
@@ -97,7 +93,6 @@ export default function FormularioReserva() {
             rows="5"
           ></textarea>
         </div>
-
         <button type="submit" className="btn btn-primary">
           Enviar Solicitud
         </button>
